@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Inscritos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="list-container">
+        <button class="nuevo" onclick="location.href='{{ url_for('registro') }}'">Nuevo</button>
+        <h1>Listado de Inscritos</h1>
+        <table cellspacing="1" tableborder="1">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Turno</th>
+                    <th>Seminarios</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscrito in inscritos %}
+                <tr>
+                    <td>{{ inscrito.fecha }}</td>
+                    <td>{{ inscrito.nombre }}</td>
+                    <td>{{ inscrito.apellidos }}</td>
+                    <td>{{ inscrito.turno }}</td>
+                    <td>{{ inscrito.seminarios }}</td>
+                    <td>
+                        <button class="editar" onclick="location.href='{{ url_for('editar', indice=loop.index0) }}'">Editar</button>
+                        <button class="eliminar" onclick="location.href='{{ url_for('eliminar', indice=loop.index0) }}'">Eliminar</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No hay inscritos registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
